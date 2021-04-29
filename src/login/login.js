@@ -4,15 +4,15 @@ class Login extends React.Component {
     constructor(props) {
         super();
         this.state = {
-            username:'',
+            // username:'',
             password:'',
             email:''
         }
     }
 
-    setUsername = (e)=>{
-        this.setState({username:e.target.value})
-    }
+    // setUsername = (e)=>{
+    //     this.setState({username:e.target.value})
+    // }
     setEmail = (e)=>{
         this.setState({email:e.target.value})
     }
@@ -29,6 +29,7 @@ class Login extends React.Component {
             email : this.state.email,
             password: this.state.password
         }
+        
         let res = await fetch('https://reqres.in/api/login',{
             method:'POST',
             headers : {
@@ -37,11 +38,14 @@ class Login extends React.Component {
             body : JSON.stringify(user)
         });
         let resJson = res.json();
-        if (resJson.token){
-            alert('login succes')
-        }else{
-            alert('user not found')
-        }
+        resJson.then((res)=>{
+            if (res.token){
+                alert('Login succes')
+            }else{
+                alert('User not found')
+            }
+        });
+        
     }
 
     render() {
@@ -49,8 +53,8 @@ class Login extends React.Component {
             <div>
                 <h2>Login</h2><br/>
                 <div className="form-group">
-                <label>Username : </label>
-                <input type="text" className="form-control" onChange={this.setUsername}  value={this.state.username}/><br/>
+                {/* <label>Username : </label>
+                <input type="text" className="form-control" onChange={this.setUsername}  value={this.state.username}/><br/> */}
                 </div>
                 <div className="form-group">
                 <label>email : </label>
